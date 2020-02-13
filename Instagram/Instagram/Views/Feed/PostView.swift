@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct PostView: View {
+    @State private var liked = false
+
     var body: some View {
         VStack {
             HStack {
@@ -23,7 +25,6 @@ struct PostView: View {
             .padding(5)
             .frame(height: 40)
             .frame(maxWidth: .infinity)
-            //            .background(Color.green)
 
             Image("defaultPostImg")
                 .resizable()
@@ -32,8 +33,14 @@ struct PostView: View {
 
             VStack(alignment: .leading, spacing: 3) {
                 HStack {
-                    Image(systemName: "suit.heart")
-                    Image(systemName: "message")
+                    Image(systemName: liked ? "heart.fill" : "heart")
+                        .foregroundColor(liked ? Color.red : Color.black)
+                        .onTapGesture {
+                            self.liked.toggle()
+                    }
+                    NavigationLink(destination: CommentsView()) {
+                        Image(systemName: "message")
+                    }.buttonStyle(PlainButtonStyle())
                     Image(systemName: "paperplane")
                     Spacer()
                     Image(systemName: "bookmark")
@@ -45,13 +52,15 @@ struct PostView: View {
                 Text("username").font(.footnote).bold() + Text(" ") + Text("Photo description")
                     .font(.footnote)
 
-                Text("View all 99 comments")
-                    .font(.footnote)
-                    .foregroundColor(Color.gray)
+                NavigationLink(destination: CommentsView()) {
+                    Text("View all 99 comments")
+                        .font(.footnote)
+                        .foregroundColor(Color.gray)
+                }.buttonStyle(PlainButtonStyle())
 
                 Text("1 hour ago")
                     .font(.system(size: 12))
-                .foregroundColor(Color.gray)
+                    .foregroundColor(Color.gray)
 
             }
             .padding(10)

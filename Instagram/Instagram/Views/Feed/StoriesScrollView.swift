@@ -13,12 +13,14 @@ struct StoriesScrollView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
                 ForEach(0...10, id: \.self) { _ in
-                    VStack {
-                        Circle()
-                            .fill(Color.yellow)
-                            .frame(width: 80, height: 60)
-                        Text("username").font(.footnote).frame(width: 80)
-                    }
+                    NavigationLink(destination: StoryView()) {
+                        VStack {
+                            Circle()
+                                .fill(Color.yellow)
+                                .frame(width: 80, height: 60)
+                            Text("username").font(.footnote).frame(width: 80)
+                        }
+                    }.buttonStyle(PlainButtonStyle()).navigationBarHidden(true)
                 }
             }
             .frame(height: 80)

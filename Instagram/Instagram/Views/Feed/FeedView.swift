@@ -25,9 +25,10 @@ struct FeedView: View {
                 
             }
             .navigationBarTitle(Text("Instagram"), displayMode: .inline)
-            .navigationBarItems(leading: HStack {
-                Image(systemName: "camera")
-            }, trailing: Image(systemName: "paperplane"))
+            .navigationBarItems(
+                leading: Image(systemName: "camera"),
+                trailing: Image(systemName: "paperplane")
+            )
         }
     }
 }
